@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>우리집</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&family=Noto+Serif+KR:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <main class="stage">
+        <section class="device-frame">
+          <div class="device-screen">
+            <article class="screen is-visible" id="screen-welcome">
+              <header class="hero-card">
+                <p class="eyebrow">우리집 첫 장</p>
+                <h2>서로의 이야기를, 한 페이지씩</h2>
+                <p class="body-copy">
+                  평소엔 묻지 못했던 이야기를 책처럼 차근차근 남겨보세요. 같은 페이지를
+                  함께 쓰고, 나란히 읽으며 서로를 알아가요.
+                </p>
+              </header>
+
+              <section class="book-preview">
+                <article class="book-cover-card">
+                  <p class="book-spine">Book 01</p>
+                  <div class="cover-copy">
+                    <h3>서로를 더 알아가는 30개의 페이지</h3>
+                    <p>같은 페이지를 함께 쓰고, 나란히 읽는 책</p>
+                  </div>
+                </article>
+              </section>
+
+              <button class="primary-button" type="button" data-go="relationship">
+                첫 책장 만들기
+              </button>
+              <button class="inline-link screen-footer-link" type="button" data-go="invite">
+                초대받은 책이 있나요?
+              </button>
+            </article>
+
+            <article class="screen" id="screen-invite">
+              <header class="screen-header">
+                <p class="eyebrow">초대받은 책</p>
+                <h2>딸이 이 책에 초대했어요</h2>
+                <p class="subtle-copy">누가 왜 이 책을 열었는지 먼저 읽어보세요.</p>
+              </header>
+
+              <section class="page-card">
+                <p class="sheet-label">함께 열 책</p>
+                <h3>서로를 더 알아가는 30개의 페이지</h3>
+                <p class="body-copy">평소에는 지나쳤던 이야기를 한 장면씩 함께 남기는 책이에요.</p>
+              </section>
+
+              <section class="ritual-card">
+                <p class="question-label">초대의 말</p>
+                <p class="body-copy">
+                  엄마와 천천히 주고받고 싶은 이야기가 있어서 이 책을 골랐어. 같이 한 장씩
+                  써보면 좋겠어.
+                </p>
+              </section>
+
+              <section class="accept-card">
+                <p class="sheet-label">참여 확인</p>
+                <p class="subtle-copy">이름만 확인하면 바로 들어갈 수 있어요.</p>
+                <div class="accept-rows">
+                  <div class="accept-row">
+                    <span class="accept-label">이름</span>
+                    <strong>엄마</strong>
+                  </div>
+                  <div class="accept-row">
+                    <span class="accept-label">함께 쓰는 사람</span>
+                    <strong>딸</strong>
+                  </div>
+                </div>
+              </section>
+
+              <button class="primary-button" type="button" data-go="ritual">
+                이 이름으로 들어가기
+              </button>
+            </article>
+
+            <article class="screen" id="screen-relationship">
+              <header class="screen-header">
+                <p class="eyebrow">첫 책장</p>
+                <h2>누구와 첫 책을 열까요</h2>
+                <p class="subtle-copy">지금 먼저 이야기를 나누고 싶은 사람을 골라요.</p>
+              </header>
+
+              <section class="relationship-list">
+                <button class="relationship-card is-selected" type="button">
+                  <span>엄마와 나의 책장</span>
+                </button>
+                <button class="relationship-card" type="button">
+                  <span>아빠와 나의 책장</span>
+                </button>
+                <button class="relationship-card muted-card" type="button">
+                  <span>나중에 정할게</span>
+                </button>
+              </section>
+
+              <button
+                class="primary-button"
+                type="button"
+                data-go="bookshelf"
+                data-go-state="bookshelf:start"
+              >
+                이 관계로 시작하기
+              </button>
+            </article>
+
+            <article class="screen" id="screen-bookshelf">
+              <header class="screen-header bookshelf-header">
+                <p class="eyebrow">엄마와 나의 책장</p>
+                <h2>엄마와 나의 책장</h2>
+                <p class="subtle-copy">같은 페이지를 함께 채워가는 책장</p>
+              </header>
+
+              <section data-state-group="bookshelf" data-state-value="start">
+                <article class="featured-book">
+                  <p class="shelf-label">추천 책</p>
+                  <p class="book-spine">Book 01</p>
+                  <h3>서로를 더 알아가는 30개의 페이지</h3>
+                  <p class="body-copy">같은 주제를 두고 서로의 문장을 건네는 30개의 페이지</p>
+                  <p class="featured-meta">30일 · 하루 한 페이지 · 기본 비공개</p>
+                  <button
+                    class="primary-button"
+                    type="button"
+                    data-set-state="bookshelf:invite"
+                  >
+                    엄마와 이 책 열기
+                  </button>
+                </article>
+              </section>
+
+              <section
+                class="invite-sheet"
+                data-state-group="bookshelf"
+                data-state-value="invite"
+                hidden
+              >
+                <div class="sheet-handle" aria-hidden="true"></div>
+                <p class="shelf-label">엄마에게 보낼 초대</p>
+                <h3>이 책을 함께 열어볼까요</h3>
+                <div class="sheet-actions">
+                  <button class="ghost-button" type="button">링크 복사</button>
+                  <button class="ghost-button" type="button">카카오톡 공유</button>
+                </div>
+                <div class="button-row">
+                  <button class="inline-button" type="button" data-set-state="bookshelf:start">
+                    다시 보기
+                  </button>
+                  <button
+                    class="primary-button"
+                    type="button"
+                    data-set-state="bookshelf:waiting"
+                  >
+                    초대 보냈어요
+                  </button>
+                </div>
+              </section>
+
+              <section
+                class="state-card"
+                data-state-group="bookshelf"
+                data-state-value="waiting"
+                hidden
+              >
+                <p class="shelf-label">초대 대기</p>
+                <h3>엄마의 참여를 기다리는 중</h3>
+                <p class="subtle-copy">들어오면 첫 속표지를 함께 써요.</p>
+                <div class="status-strip">
+                  <span class="status-chip status-mine">링크 보냄</span>
+                  <span class="status-chip">엄마 참여 전</span>
+                </div>
+                <div class="button-row">
+                  <button class="ghost-button" type="button" data-set-state="bookshelf:invite">
+                    링크 다시 보내기
+                  </button>
+                  <button class="primary-button" type="button" data-go="ritual">
+                    엄마와 첫 장 열기
+                  </button>
+                </div>
+              </section>
+
+              <button class="inline-link" type="button">책꽂이 보기</button>
+            </article>
+
+            <article class="screen" id="screen-ritual">
+              <header class="screen-header">
+                <p class="eyebrow">첫 속표지</p>
+                <h2>이 책을 여는 두 문장</h2>
+                <p class="subtle-copy">함께 남긴 두 문장은 이 책의 첫 장이 돼요.</p>
+              </header>
+
+              <section class="ritual-card">
+                <p class="question-label">우리는 왜 이 책을 함께 열까요</p>
+                <div class="two-column-note">
+                  <div class="note-pane child-note">
+                    <span class="note-author">나</span>
+                    <p>평소엔 지나친 이야기를 이제는 천천히 남기고 싶어서.</p>
+                  </div>
+                  <div class="note-pane parent-note">
+                    <span class="note-author">엄마</span>
+                    <p>네가 묻는 말을 따라가며 지난날의 나와 지금의 너를 함께 돌아보고 싶어서.</p>
+                  </div>
+                </div>
+              </section>
+
+              <section class="ritual-card">
+                <p class="question-label">이 책을 쓰며 서로 무엇을 더 알고 싶나요</p>
+                <div class="two-column-note">
+                  <div class="note-pane child-note">
+                    <span class="note-author">나</span>
+                    <p>엄마가 내 나이 무렵 어떤 문장으로 하루를 건넜는지 알고 싶어.</p>
+                  </div>
+                  <div class="note-pane parent-note">
+                    <span class="note-author">엄마</span>
+                    <p>네가 요즘 어떤 장면 앞에서 오래 머무는지 더 알고 싶어.</p>
+                  </div>
+                </div>
+              </section>
+
+              <p class="date-line">우리는 2026년 3월 13일부터 이 책을 함께 쓰기 시작했어요.</p>
+              <button class="primary-button" type="button" data-go="today" data-go-state="today:prompt">
+                오늘의 페이지 열기
+              </button>
+            </article>
+
+            <article class="screen" id="screen-today">
+              <header class="screen-header">
+                <p class="eyebrow">4번째 페이지</p>
+                <h2>오늘의 페이지</h2>
+              </header>
+
+              <section class="page-card" data-state-group="today" data-state-value="prompt">
+                <p class="book-context">엄마와 나의 책장 · 서로를 더 알아가는 30개의 페이지</p>
+                <p class="page-theme">오늘의 주제</p>
+                <h3>우리가 지나고 있는 젊은 날</h3>
+                <p class="page-question">요즘의 너는 어떤 걱정을 안고 하루를 지나고 있어?</p>
+                <div class="status-strip">
+                  <span class="status-chip status-mine">내 답변 전</span>
+                  <span class="status-chip">엄마 답변 전</span>
+                </div>
+              </section>
+
+              <div class="screen-action" data-state-group="today" data-state-value="prompt">
+                <button class="primary-button" type="button" data-go="write">
+                  답변 쓰기
+                </button>
+              </div>
+
+              <section
+                class="state-card waiting-card"
+                data-state-group="today"
+                data-state-value="waiting"
+                hidden
+              >
+                <p class="shelf-label">답변 완료</p>
+                <h3>내 문장은 먼저 남겨졌어요</h3>
+                <p class="body-copy">
+                  잘해야 한다는 생각이 오래 남아. 미래를 떠올리면 기대보다 두려움이 먼저
+                  오는 날도 있어.
+                </p>
+                <div class="status-strip">
+                  <span class="status-chip status-mine">내 답변 완료</span>
+                  <span class="status-chip">엄마 답변 기다리는 중</span>
+                </div>
+                <div class="button-row">
+                  <button class="ghost-button" type="button" data-go="flow">
+                    책의 흐름 보기
+                  </button>
+                </div>
+              </section>
+            </article>
+
+            <article class="screen" id="screen-write">
+              <header class="screen-header">
+                <p class="eyebrow">4번째 페이지</p>
+                <h2>오늘의 문장을 적어볼까요</h2>
+                <p class="subtle-copy">길지 않아도 괜찮아요.</p>
+              </header>
+
+              <section class="page-card">
+                <p class="book-context">엄마와 나의 책장 · 4번째 페이지</p>
+                <p class="page-theme">오늘의 주제</p>
+                <h3>우리가 지나고 있는 젊은 날</h3>
+                <div class="prompt-block">
+                  <div class="prompt-header">
+                    <p class="question-label">질문</p>
+                    <button
+                      class="help-icon-button"
+                      type="button"
+                      aria-label="실마리 보기"
+                      title="실마리 보기"
+                      data-help-open="write-help-layer"
+                    >
+                      <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="12" r="8.5"></circle>
+                        <path d="M12 10.2v4.3"></path>
+                        <circle cx="12" cy="7.8" r="0.9" fill="currentColor" stroke="none"></circle>
+                      </svg>
+                    </button>
+                  </div>
+                  <p class="page-question">요즘의 너는 어떤 걱정을 안고 하루를 지나고 있어?</p>
+                </div>
+              </section>
+
+              <section class="writing-sheet">
+                <p class="sheet-label">내 문장</p>
+                <p class="writing-text">
+                  잘해야 한다는 생각이 오래 남아. 미래를 떠올리면 기대보다 두려움이 먼저
+                  오는 날도 있어. 그래도 지금의 마음을 지나가게 두고 싶지는 않아.
+                </p>
+              </section>
+
+              <p class="privacy-note">이 문장은 이 책 안에서만 보여요.</p>
+              <button
+                class="primary-button"
+                type="button"
+                data-go="today"
+                data-go-state="today:waiting"
+              >
+                이 문장 남기기
+              </button>
+
+              <div class="help-sheet-layer" id="write-help-layer" hidden aria-hidden="true">
+                <button
+                  class="help-sheet-backdrop"
+                  type="button"
+                  aria-label="실마리 닫기"
+                  data-help-close
+                ></button>
+                <aside
+                  class="help-sheet"
+                  role="dialog"
+                  aria-modal="false"
+                  aria-labelledby="write-help-title"
+                >
+                  <div class="help-sheet-handle" aria-hidden="true" data-help-drag-handle></div>
+                  <h3 id="write-help-title">충분히 생각해보세요</h3>
+                  <p class="help-sheet-copy">
+                    꼭 특별한 사건이 아니어도 괜찮아요. 요즘 자주 떠오르는 말, 오래 남아
+                    있는 표정, 문득 멈춰 서게 되는 장면을 천천히 따라가보세요.
+                  </p>
+                </aside>
+              </div>
+            </article>
+
+            <article class="screen" id="screen-spread">
+              <header class="screen-header">
+                <p class="eyebrow">함께 펼친 페이지</p>
+                <h2>두 사람의 문장이 나란히 놓였어요</h2>
+              </header>
+
+              <p class="spread-theme">오늘의 주제 · 우리가 지나고 있는 젊은 날</p>
+
+              <section class="book-spread">
+                <article class="spread-page child-page">
+                  <span class="spread-role">Daughter</span>
+                  <p class="spread-question">요즘의 너는 어떤 걱정을 안고 하루를 지나고 있어?</p>
+                  <p class="spread-answer">
+                    잘해야 한다는 생각이 오래 남아. 미래를 떠올리면 기대보다 두려움이 먼저
+                    오는 날도 있어. 그래도 지금의 마음을 지나가게 두고 싶지는 않아.
+                  </p>
+                </article>
+
+                <article class="spread-page parent-page">
+                  <span class="spread-role">Mom</span>
+                  <p class="spread-question">
+                    엄마가 내 나이였을 때, 가장 오래 붙잡고 있던 걱정은 뭐였어?
+                  </p>
+                  <p class="spread-answer">
+                    스물아홉의 나는 겉으로는 차분했지만 안에서는 늘 흔들렸어. 잘 살고
+                    있는지, 사랑받을 수 있을지, 지금의 선택이 맞는지 오래 붙잡고 있었지.
+                  </p>
+                </article>
+              </section>
+
+              <section class="reflection-card">
+                <p class="question-label">오늘 우리 사이를 새롭게 보게 한 장면이 있었나요?</p>
+                <p class="body-copy">
+                  같은 주제를 사이에 두고 보니, 우리가 비슷한 마음을 지나고 있었다는 걸 알게 됐어.
+                </p>
+              </section>
+
+              <section class="writing-sheet spread-reply">
+                <p class="sheet-label">이어 적는 말</p>
+                <p class="writing-text">
+                  엄마가 그 시절을 이렇게 말해줘서, 지금의 엄마와 지금의 나를 한 페이지에서
+                  같이 보게 됐어.
+                </p>
+              </section>
+
+              <button class="primary-button" type="button">답장 남기기</button>
+            </article>
+
+            <article class="screen" id="screen-flow">
+              <header class="screen-header">
+                <p class="eyebrow">엄마와 나의 책장</p>
+                <h2>책의 흐름</h2>
+                <p class="subtle-copy">같이 쓴 페이지가 차례처럼 쌓여 있어요.</p>
+              </header>
+
+              <section class="flow-overview">
+                <p class="sheet-label">지금 쓰는 책</p>
+                <h3>서로를 더 알아가는 30개의 페이지</h3>
+                <p class="body-copy">서로에게 건넨 문장이 한 페이지씩 이어지고 있어요.</p>
+                <div class="flow-progress-row">
+                  <div class="progress-block" aria-label="진행률 5/30">
+                    <div class="progress-track">
+                      <span class="progress-fill" style="width: 16.7%"></span>
+                    </div>
+                    <p class="flow-progress-copy">5/30</p>
+                  </div>
+                  <p class="flow-current-copy">현재 페이지 · 6번째 페이지</p>
+                </div>
+                <button class="primary-button" type="button" data-go="today">
+                  오늘 페이지 열기
+                </button>
+              </section>
+
+              <section class="flow-section">
+                <div class="flow-section-head">
+                  <p class="sheet-label">페이지 목록</p>
+                </div>
+                <div class="flow-list">
+                  <button class="flow-item is-complete" type="button" data-go="spread">
+                    <span class="pair-marker" aria-hidden="true">
+                      <span class="marker-dot parent"></span>
+                      <span class="marker-dot child"></span>
+                    </span>
+                    <span class="flow-copy">
+                      <strong>어린 시절의 행복한 기억</strong>
+                      <span>1p · 함께 읽은 페이지</span>
+                    </span>
+                  </button>
+                  <button class="flow-item is-complete" type="button" data-go="spread">
+                    <span class="pair-marker" aria-hidden="true">
+                      <span class="marker-dot parent"></span>
+                      <span class="marker-dot child"></span>
+                    </span>
+                    <span class="flow-copy">
+                      <strong>요즘 마음이 머무는 순간</strong>
+                      <span>2p · 함께 읽은 페이지</span>
+                    </span>
+                  </button>
+                  <button class="flow-item is-complete" type="button" data-go="spread">
+                    <span class="pair-marker" aria-hidden="true">
+                      <span class="marker-dot parent"></span>
+                      <span class="marker-dot child"></span>
+                    </span>
+                    <span class="flow-copy">
+                      <strong>첫사랑을 떠올리는 방법</strong>
+                      <span>3p · 함께 읽은 페이지</span>
+                    </span>
+                  </button>
+                  <button class="flow-item is-complete" type="button" data-go="spread">
+                    <span class="pair-marker" aria-hidden="true">
+                      <span class="marker-dot parent"></span>
+                      <span class="marker-dot child"></span>
+                    </span>
+                    <span class="flow-copy">
+                      <strong>우리 집의 좋았던 장면</strong>
+                      <span>4p · 함께 읽은 페이지</span>
+                    </span>
+                  </button>
+                  <button class="flow-item is-complete" type="button" data-go="spread">
+                    <span class="pair-marker" aria-hidden="true">
+                      <span class="marker-dot parent"></span>
+                      <span class="marker-dot child"></span>
+                    </span>
+                    <span class="flow-copy">
+                      <strong>처음 나를 만났던 날</strong>
+                      <span>5p · 함께 읽은 페이지</span>
+                    </span>
+                  </button>
+                  <button class="flow-item is-current" type="button" data-go="today">
+                    <span class="flow-icon current" aria-hidden="true"></span>
+                    <span class="flow-copy">
+                      <strong>요즘 가장 마음에 걸리는 것</strong>
+                      <span>6p · 오늘 펼칠 페이지</span>
+                    </span>
+                  </button>
+                  <div class="flow-item is-locked">
+                    <span class="flow-icon locked" aria-hidden="true"></span>
+                    <span class="flow-copy">
+                      <strong>어린 시절의 꿈</strong>
+                      <span>7p · 아직 열리지 않은 페이지</span>
+                    </span>
+                  </div>
+                  <div class="flow-item is-locked">
+                    <span class="flow-icon locked" aria-hidden="true"></span>
+                    <span class="flow-copy">
+                      <strong>나중에 닮고 싶은 사람</strong>
+                      <span>8p · 아직 열리지 않은 페이지</span>
+                    </span>
+                  </div>
+                  <div class="flow-item is-locked">
+                    <span class="flow-icon locked" aria-hidden="true"></span>
+                    <span class="flow-copy">
+                      <strong>가장 힘들었던 시절</strong>
+                      <span>9p · 아직 열리지 않은 페이지</span>
+                    </span>
+                  </div>
+                  <div class="flow-item is-locked">
+                    <span class="flow-icon locked" aria-hidden="true"></span>
+                    <span class="flow-copy">
+                      <strong>우리 가족을 떠올리는 장면</strong>
+                      <span>10p · 아직 열리지 않은 페이지</span>
+                    </span>
+                  </div>
+                  <div class="flow-item is-locked">
+                    <span class="flow-icon locked" aria-hidden="true"></span>
+                    <span class="flow-copy">
+                      <strong>지금 붙잡고 싶은 가치</strong>
+                      <span>11p · 아직 열리지 않은 페이지</span>
+                    </span>
+                  </div>
+                </div>
+              </section>
+
+              <section class="flow-section revisit-section">
+                <div class="flow-section-head">
+                  <p class="sheet-label">지금까지 함께 쓴 페이지</p>
+                </div>
+                <div class="revisit-list">
+                  <button class="revisit-item" type="button" data-go="spread">
+                    <span class="pair-marker" aria-hidden="true">
+                      <span class="marker-dot parent"></span>
+                      <span class="marker-dot child"></span>
+                    </span>
+                    <span class="flow-copy">
+                      <strong>어린 시절의 행복한 기억</strong>
+                      <span>다시 펼쳐보기</span>
+                    </span>
+                  </button>
+                  <button class="revisit-item" type="button" data-go="spread">
+                    <span class="pair-marker" aria-hidden="true">
+                      <span class="marker-dot parent"></span>
+                      <span class="marker-dot child"></span>
+                    </span>
+                    <span class="flow-copy">
+                      <strong>우리 집의 좋았던 장면</strong>
+                      <span>다시 펼쳐보기</span>
+                    </span>
+                  </button>
+                  <button class="revisit-item" type="button" data-go="spread">
+                    <span class="pair-marker" aria-hidden="true">
+                      <span class="marker-dot parent"></span>
+                      <span class="marker-dot child"></span>
+                    </span>
+                    <span class="flow-copy">
+                      <strong>처음 나를 만났던 날</strong>
+                      <span>다시 펼쳐보기</span>
+                    </span>
+                  </button>
+                </div>
+              </section>
+
+              <button class="inline-link screen-footer-link" type="button" data-go="bonus">
+                이번 주 보너스 페이지 보기
+              </button>
+            </article>
+
+            <article class="screen" id="screen-bonus">
+              <header class="screen-header">
+                <p class="eyebrow">일요일 보너스 페이지</p>
+                <h2>이번 주 문장에 한 번 더 머물러요</h2>
+                <p class="subtle-copy">새 질문 대신, 이번 주에 남은 문장을 다시 펼쳐봐요.</p>
+              </header>
+
+              <section class="bonus-stack">
+                <article class="quote-card">
+                  <p class="sheet-label">이번 주에 남은 문장</p>
+                  <p class="body-copy">
+                    잘해야 한다는 생각이 오래 남아. 미래를 떠올리면 기대보다 두려움이 먼저
+                    오는 날도 있어.
+                  </p>
+                </article>
+                <article class="quote-card">
+                  <p class="sheet-label">함께 읽은 문장</p>
+                  <p class="body-copy">
+                    스물아홉의 나는 겉으로는 차분했지만 안에서는 늘 흔들렸어.
+                  </p>
+                </article>
+              </section>
+
+              <section class="reflection-card">
+                <p class="question-label">
+                  이번 주 서로에 대해 새롭게 알게 된 것이 있었나요? 하고 싶은 말이 있다면
+                  자유롭게 전해주세요.
+                </p>
+              </section>
+
+              <section class="writing-sheet">
+                <p class="sheet-label">보너스 회고</p>
+                <p class="writing-text">
+                  이번 주엔 우리가 같은 주제를 얼마나 다르게, 또 닮게 지나가는지 보게 됐어.
+                  그래서 다음 페이지가 조금 더 자연스럽게 열릴 것 같아.
+                </p>
+              </section>
+
+              <button class="primary-button" type="button">보너스 문장 남기기</button>
+              <button class="inline-link" type="button" data-go="complete">
+                마지막 장 보기
+              </button>
+            </article>
+
+            <article class="screen" id="screen-complete">
+              <header class="screen-header">
+                <p class="eyebrow">마지막 장</p>
+                <h2>우리가 한 권을 다 썼어요</h2>
+                <p class="subtle-copy">함께 쓴 페이지가 이제 책장에 남아요.</p>
+              </header>
+
+              <section class="flow-overview completion-overview">
+                <p class="sheet-label">함께 완성한 책</p>
+                <h3>서로를 더 알아가는 30개의 페이지</h3>
+                <p class="body-copy">30개의 페이지를 함께 쓰고, 나란히 읽으며 한 권을 끝까지 건너왔어요.</p>
+                <p class="flow-current-copy">함께 완성한 페이지 · 30페이지</p>
+              </section>
+
+              <section class="reflection-card">
+                <p class="question-label">서로 새롭게 보인 마음</p>
+                <p class="body-copy">
+                  같은 주제 위에 적힌 두 문장이 쌓이면서, 서로가 지나온 시간과 지금의 마음을
+                  한 권 안에서 나란히 보게 됐어.
+                </p>
+              </section>
+
+              <section class="bonus-stack">
+                <article class="quote-card">
+                  <p class="sheet-label">기억에 남는 문장</p>
+                  <p class="body-copy">
+                    잘해야 한다는 생각이 오래 남아. 미래를 떠올리면 기대보다 두려움이 먼저 오는
+                    날도 있어.
+                  </p>
+                </article>
+                <article class="quote-card">
+                  <p class="sheet-label">함께 남긴 문장</p>
+                  <p class="body-copy">
+                    엄마가 그 시절을 이렇게 말해줘서, 지금의 엄마와 지금의 나를 한 페이지에서 같이
+                    보게 됐어.
+                  </p>
+                </article>
+              </section>
+
+              <p class="privacy-note">이 기록은 기본적으로 이 책장 안에만 머물러요.</p>
+              <div class="button-row">
+                <button class="primary-button" type="button">책장에 꽂기</button>
+                <button class="ghost-button" type="button">요약본 만들기</button>
+              </div>
+              <button class="inline-link" type="button">이 문장만 공유하기</button>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
