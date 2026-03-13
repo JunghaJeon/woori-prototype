@@ -1,15 +1,20 @@
 const defaultStates = {
   bookshelf: "start",
+  bookshelfAdd: "closed",
   today: "prompt",
+  hub: "empty",
+};
+
+const defaultSelections = {
+  relationship: "mom",
 };
 
 const currentStates = { ...defaultStates };
+const currentSelections = { ...defaultSelections };
 
 const screenEls = Array.from(document.querySelectorAll(".screen"));
-const actionButtons = Array.from(
-  document.querySelectorAll("[data-go], [data-set-state], [data-go-state]"),
-);
 const stateEls = Array.from(document.querySelectorAll("[data-state-group][data-state-value]"));
+const selectableButtons = Array.from(document.querySelectorAll("[data-select-group][data-select-value]"));
 const helpOpenButtons = Array.from(document.querySelectorAll("[data-help-open]"));
 const helpCloseButtons = Array.from(document.querySelectorAll("[data-help-close]"));
 const helpLayers = Array.from(document.querySelectorAll(".help-sheet-layer"));
@@ -17,6 +22,31 @@ const helpDragHandles = Array.from(document.querySelectorAll("[data-help-drag-ha
 
 let activeHelpLayer = null;
 let helpDragState = null;
+let currentScreen = "welcome";
+const screenHistory = [];
+
+screenEls.forEach((screen) => {
+  if (
+    screen.id === "screen-welcome" ||
+    screen.classList.contains("hub-screen") ||
+    screen.querySelector("[data-back]")
+  ) {
+    return;
+  }
+
+  const backButton = document.createElement("button");
+  backButton.type = "button";
+  backButton.className = "screen-back";
+  backButton.dataset.back = "true";
+  backButton.setAttribute("aria-label", "뒤로가기");
+  backButton.innerHTML = '<span aria-hidden="true">‹</span><span>뒤로</span>';
+  screen.insertBefore(backButton, screen.firstChild);
+});
+
+const actionButtons = Array.from(
+  document.querySelectorAll("[data-go], [data-set-state], [data-go-state]"),
+);
+const backButtons = Array.from(document.querySelectorAll("[data-back]"));
 
 function renderStateGroup(group) {
   const value = currentStates[group];
@@ -39,13 +69,40 @@ function setState(group, value) {
   renderStateGroup(group);
 }
 
+function renderSelectionGroup(group) {
+  const value = currentSelections[group];
+
+  selectableButtons.forEach((button) => {
+    if (button.dataset.selectGroup !== group) {
+      return;
+    }
+
+    button.classList.toggle("is-selected", button.dataset.selectValue === value);
+  });
+}
+
+function setSelection(group, value) {
+  if (!group || !value) {
+    return;
+  }
+
+  currentSelections[group] = value;
+  renderSelectionGroup(group);
+}
+
 function applyStateAction(action) {
   if (!action) {
     return;
   }
 
-  const [group, value] = action.split(":");
-  setState(group, value);
+  action
+    .split(",")
+    .map((entry) => entry.trim())
+    .filter(Boolean)
+    .forEach((entry) => {
+      const [group, value] = entry.split(":");
+      setState(group, value);
+    });
 }
 
 function resetHelpSheet(layer) {
@@ -86,12 +143,30 @@ function openHelpSheet(layerId) {
   activeHelpLayer = nextLayer;
 }
 
-function showScreen(screenId) {
+function showScreen(screenId, options = {}) {
+  const { pushHistory = true } = options;
+
   closeHelpSheet();
+
+  if (!screenId || screenId === currentScreen) {
+    return;
+  }
+
+  if (pushHistory && currentScreen) {
+    screenHistory.push(currentScreen);
+  }
 
   screenEls.forEach((screen) => {
     screen.classList.toggle("is-visible", screen.id === `screen-${screenId}`);
   });
+
+  currentScreen = screenId;
+}
+
+function goBack() {
+  closeHelpSheet();
+  const previousScreen = screenHistory.pop() || "welcome";
+  showScreen(previousScreen, { pushHistory: false });
 }
 
 actionButtons.forEach((button) => {
@@ -100,9 +175,21 @@ actionButtons.forEach((button) => {
     applyStateAction(button.dataset.goState);
 
     if (button.dataset.go) {
-      showScreen(button.dataset.go);
+      showScreen(button.dataset.go, {
+        pushHistory: button.dataset.rootNav !== "true",
+      });
     }
   });
+});
+
+selectableButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    setSelection(button.dataset.selectGroup, button.dataset.selectValue);
+  });
+});
+
+backButtons.forEach((button) => {
+  button.addEventListener("click", goBack);
 });
 
 helpOpenButtons.forEach((button) => {
@@ -193,4 +280,10 @@ Object.entries(defaultStates).forEach(([group, value]) => {
   setState(group, value);
 });
 
-showScreen("welcome");
+Object.entries(defaultSelections).forEach(([group, value]) => {
+  setSelection(group, value);
+});
+
+screenEls.forEach((screen) => {
+  screen.classList.toggle("is-visible", screen.id === "screen-welcome");
+});
