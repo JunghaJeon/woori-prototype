@@ -1186,15 +1186,33 @@ textarea {
     linear-gradient(180deg, rgba(243, 248, 252, 0.72), rgba(255, 251, 246, 0.92));
 }
 
+.child-margin-note .margin-note-label {
+  color: var(--child-ink);
+}
+
+.parent-margin-note {
+  border-color: rgba(159, 115, 122, 0.1);
+  background:
+    linear-gradient(180deg, rgba(253, 247, 248, 0.72), rgba(255, 251, 246, 0.92));
+}
+
+.parent-margin-note .margin-note-label {
+  color: var(--parent-ink);
+}
+
 .margin-note-label {
   margin: 0 0 6px;
   font-size: 0.64rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--child-ink);
   font-family: var(--font-body);
   font-weight: 600;
   opacity: 0.78;
+}
+
+.memo-guide-question {
+  font-style: italic;
+  opacity: 0.6;
 }
 
 .margin-note-copy {
@@ -1542,4 +1560,51 @@ textarea {
     width: 100%;
     justify-items: stretch;
   }
+}
+
+/* ── Entry Simulator ── */
+
+.screen-entry {
+  gap: 24px;
+}
+
+.entry-header {
+  gap: 10px;
+}
+
+.entry-options {
+  display: grid;
+  gap: 10px;
+}
+
+.entry-option {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+  padding: 18px 20px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+  background: var(--paper-strong);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+.entry-option:hover {
+  border-color: rgba(140, 103, 79, 0.28);
+  background: rgba(255, 251, 246, 0.98);
+}
+
+.entry-option strong {
+  font-family: var(--font-body);
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.entry-option span {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.5;
 }

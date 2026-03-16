@@ -276,6 +276,79 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
+/* ── Entry Simulator ── */
+
+const entryProfiles = {
+  new_user: {
+    states: { bookshelf: "start", bookshelfAdd: "closed", hub: "empty", today: "prompt" },
+    screen: "welcome",
+  },
+  before_write: {
+    states: { bookshelf: "active", bookshelfAdd: "closed", hub: "active", today: "prompt" },
+    screen: "today",
+  },
+  waiting: {
+    states: { bookshelf: "active", bookshelfAdd: "closed", hub: "active", today: "waiting" },
+    screen: "today",
+  },
+  both_done: {
+    states: { bookshelf: "active", bookshelfAdd: "closed", hub: "active", today: "waiting" },
+    screen: "spread",
+  },
+  day_done: {
+    states: { bookshelf: "active", bookshelfAdd: "closed", hub: "active", today: "waiting" },
+    screen: "spread",
+  },
+};
+
+function syncTabBar(screenId) {
+  const hubScreenIds = ["today", "flow", "bookshelf"];
+  const allTabs = Array.from(document.querySelectorAll(".hub-tab"));
+
+  allTabs.forEach((tab) => {
+    const tabTarget = tab.dataset.go;
+    tab.classList.toggle("is-active", tabTarget === screenId);
+  });
+}
+
+function enterAs(profileKey) {
+  const profile = entryProfiles[profileKey];
+  if (!profile) {
+    return;
+  }
+
+  Object.entries(profile.states).forEach(([group, value]) => {
+    setState(group, value);
+  });
+
+  screenHistory.length = 0;
+  currentScreen = "entry";
+
+  showScreen(profile.screen);
+  syncTabBar(profile.screen);
+}
+
+const entryButtons = Array.from(document.querySelectorAll("[data-entry]"));
+entryButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    enterAs(button.dataset.entry);
+  });
+});
+
+/* ── Sync tab bar on hub navigation ── */
+
+const originalShowScreen = showScreen;
+
+actionButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    if (button.dataset.go && button.dataset.rootNav === "true") {
+      syncTabBar(button.dataset.go);
+    }
+  });
+});
+
+/* ── Initialization ── */
+
 Object.entries(defaultStates).forEach(([group, value]) => {
   setState(group, value);
 });
@@ -285,5 +358,6 @@ Object.entries(defaultSelections).forEach(([group, value]) => {
 });
 
 screenEls.forEach((screen) => {
-  screen.classList.toggle("is-visible", screen.id === "screen-welcome");
+  screen.classList.toggle("is-visible", screen.id === "screen-entry");
 });
+
